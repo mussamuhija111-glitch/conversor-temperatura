@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor de Temperatura</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eaeaea;
+  margin: 0;
+  padding: 20px;
+}
+.conversor {
+  background-color: white;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  text-align: center;
+}
+.conversor input,
+.conversor select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.conversor button {
+  background-color: #4a90d9;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#resultado {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+</style>
+</head>
+<body>
+
+<div class="conversor">
+  <h1>Conversor de Temperatura</h1>
+
+  <input type="number" id="valorEntrada" placeholder="Digite a temperatura">
+
+  <select id="unidadeEntrada">
+    <option value="celsius">Celsius (°C)</option>
+    <option value="fahrenheit">Fahrenheit (°F)</option>
+  </select>
+
+  <p>para</p>
+
+  <select id="unidadeSaida">
+    <option value="fahrenheit">Fahrenheit (°F)</option>
+    <option value="celsius">Celsius (°C)</option>
+  </select>
+
+  <button onclick="converter()">Converter</button>
+
+  <p id="resultado"></p>
+</div>
+
+<script>
+function converter() {
+  const valor = parseFloat(document.getElementById("valorEntrada").value);
+  const unidadeEntrada = document.getElementById("unidadeEntrada").value;
+  const unidadeSaida = document.getElementById("unidadeSaida").value;
+
+  if (isNaN(valor)) {
+    document.getElementById("resultado").textContent = "Digite um número válido!";
+    return;
+  }
+
+  let resultado;
+
+  if (unidadeEntrada === unidadeSaida) {
+    resultado = valor;
+  } else if (unidadeEntrada === "celsius" && unidadeSaida === "fahrenheit") {
+    resultado = (valor * 9/5) + 32;
+  } else {
+    resultado = (valor - 32) * 5/9;
+  }
+
+  document.getElementById("resultado").textContent = valor + "° " + unidadeEntrada + " = " + resultado.toFixed(1) + "° " + unidadeSaida;
+}
+</script>
+
+</body>
+</html>
